@@ -1,14 +1,14 @@
 import { createHash } from "crypto";
 import { createReadStream, readdirSync } from "fs";
 
-export const makeHash = async (
+export default async function (
   sourceDirImages: string,
   sourceDirMetadata: string,
   sortingFunction?: (a: string, b: string) => number
 ): Promise<{
   imagesProvenanceHash: string;
   metadataProvenanceHash: string;
-}> => {
+}> {
   const jsonFiles = sortingFunction
     ? readdirSync(sourceDirMetadata)
     : readdirSync(sourceDirMetadata).sort(sortingFunction);
@@ -35,7 +35,7 @@ export const makeHash = async (
     imagesProvenanceHash: await hash(fullImgHash, false),
     metadataProvenanceHash: await hash(fullMetadataHash, false),
   };
-};
+}
 
 const hash = async (data: string, isFile: boolean): Promise<string> => {
   const hash = createHash("sha256");
