@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ESNext"
+    ],
+    "outDir": "./dist",
+    "removeComments": true,
+    "target": "es2017",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": {},
+    "sourceMap": false,
+    "rootDirs": ["src"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules/**/*"
+  ]
+}

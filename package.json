@@ -1,0 +1,24 @@
+{
+  "name": "node-provenance-hash",
+  "description": "A cli tool to use when you need to create a provenance HASH for an HFT project.Can also be used to prove that folder contents have not been changed since creation of the hash",
+  "license": "MIT",
+  "version": "0.0.1",
+  "author": {
+    "email": "ttokic1985@gmail.com",
+    "name": "Tino Tokic"
+  },
+  "dependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "scripts": {
+    "build": "yarn tsc src/main.ts --outDir dist",
+    "hash": "ts-node app.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "prettier": "^2.4.1"
+  },
+  "main": "dist/main",
+  "typings": "dist/main"
+}
