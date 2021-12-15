@@ -7,9 +7,6 @@
     "email": "ttokic1985@gmail.com",
     "name": "Tino Tokic"
   },
-  "dependencies": {
-    "node-provenance-hash": "^0.0.3"
-  },
   "scripts": {
     "build": "yarn tsc src/main.ts --outDir dist --declaration",
     "hash": "ts-node app.ts",
