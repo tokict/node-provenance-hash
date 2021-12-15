@@ -2,38 +2,49 @@ import { createHash } from "crypto";
 import { createReadStream, readdirSync } from "fs";
 
 export default async function (
-  sourceDirImages: string,
-  sourceDirMetadata: string,
+  sourceDirImages?: string,
+  sourceDirMetadata?: string,
   sortingFunction?: (a: string, b: string) => number
 ): Promise<{
-  imagesProvenanceHash: string;
-  metadataProvenanceHash: string;
+  imagesProvenanceHash: string | undefined;
+  metadataProvenanceHash?: string;
 }> {
-  const jsonFiles = sortingFunction
-    ? readdirSync(sourceDirMetadata)
-    : readdirSync(sourceDirMetadata).sort(sortingFunction);
+  let imagesProvenanceHash;
+  let metadataProvenanceHash;
 
-  const imageFiles = sortingFunction
-    ? readdirSync(sourceDirImages)
-    : readdirSync(sourceDirImages).sort(sortingFunction);
+  if (sourceDirMetadata) {
+    const jsonFiles = sortingFunction
+      ? readdirSync(sourceDirMetadata)
+      : readdirSync(sourceDirMetadata).sort(sortingFunction);
 
-  let fullImgHash = "";
+    let fullMetadataHash = "";
 
-  for (const file of imageFiles) {
-    const h = await hash(sourceDirImages + "/" + file, true);
-    fullImgHash += h;
+    for (const file of jsonFiles) {
+      const h = await hash(sourceDirMetadata + "/" + file, true);
+      fullMetadataHash += h;
+    }
+
+    metadataProvenanceHash = await hash(fullMetadataHash, false);
   }
 
-  let fullMetadataHash = "";
+  if (sourceDirImages) {
+    const imageFiles = sortingFunction
+      ? readdirSync(sourceDirImages)
+      : readdirSync(sourceDirImages).sort(sortingFunction);
 
-  for (const file of jsonFiles) {
-    const h = await hash(sourceDirMetadata + "/" + file, true);
-    fullMetadataHash += h;
+    let fullImgHash = "";
+
+    for (const file of imageFiles) {
+      const h = await hash(sourceDirImages + "/" + file, true);
+      fullImgHash += h;
+    }
+
+    imagesProvenanceHash = await hash(fullImgHash, false);
   }
 
   return {
-    imagesProvenanceHash: await hash(fullImgHash, false),
-    metadataProvenanceHash: await hash(fullMetadataHash, false),
+    imagesProvenanceHash,
+    metadataProvenanceHash,
   };
 }
 

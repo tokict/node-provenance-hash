@@ -1,0 +1,41 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": 2,
+    "no-console": 2,
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "lodash",
+        "message": "Use 'lodash/fp' methods. This is both for consistency, and because 'lodash' itself cannot be tree-shaken, so loading it like that adds ~5MB to the final frontend bundle"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": [
+      2,
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true,
+        "allowHigherOrderFunctions": true
+      }
+    ]
+  }
+}

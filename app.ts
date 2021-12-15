@@ -1,5 +1,5 @@
 //The following function will sort the files in ascending order using number derived from filename i.e 1.jpg (if it doesn't contain Infinity and NaN)
-import makeHash from "node-provenance-hash";
+import makeHash from "./src/main";
 
 const numericalCompare = (a: string, b: string): number => {
   const fileNameToNumber = (file: string): number => Number(file.split(".")[0]);
@@ -7,8 +7,6 @@ const numericalCompare = (a: string, b: string): number => {
   return fileNameToNumber(a) - fileNameToNumber(b);
 };
 
-makeHash(
-  __dirname + "/sources/images",
-  __dirname + "/sources/json",
-  numericalCompare
-).then((data) => console.log(data));
+makeHash(undefined, __dirname + "/sources/json", numericalCompare).then(
+  (data) => console.log(data)
+);

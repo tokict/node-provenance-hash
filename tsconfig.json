@@ -9,7 +9,7 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "types": "node",
+    "types": ["node"],
     "paths": {},
     "sourceMap": false,
     "rootDirs": ["src"],
